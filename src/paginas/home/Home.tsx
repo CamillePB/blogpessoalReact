@@ -2,11 +2,12 @@ import React from 'react';
 //import './Home.css';
 import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
+import Carrossel from '../../components/carrossel/Carrossel';
 
 function Home() {
   return (
     <>
-      <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#992a2a"}}>
+     {/* <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#992a2a"}}>
                 <Grid alignItems="center" item xs={6}>
                     <Box paddingX={20} >
                         <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "white", fontWeight: "bold" }}>Seja bem vindo(a)!</Typography>
@@ -23,7 +24,12 @@ function Home() {
                 </Grid>
                 <Grid xs={12} style={{ backgroundColor: "white" }}>
                 </Grid>
-            </Grid>
+  </Grid>*/}
+            <Grid container style={{ marginTop: "8px" }}>
+                    <Grid item xs={12}>
+                        <Carrossel />
+                    </Grid>
+                </Grid>
     </>
   )
 }
