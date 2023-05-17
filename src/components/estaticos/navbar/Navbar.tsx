@@ -10,15 +10,15 @@ function Navbar() {
         <>
             <AppBar position="static" style={{ backgroundColor: "#7e1f1f" }}>
                 <Toolbar variant="dense">
-                    <Box style={{ cursor: "pointer" }} >
+                    <Box style={{ cursor: "pointer" }}>
                         <Typography variant="h5" color="inherit">
                             Blog Pessoal
                         </Typography>
                     </Box>
 
-                <Box display="flex" justifyContent="start" marginLeft={55}>
+                <Box display="flex" justifyContent="start">
                     <Link to='/home' className='text-decorator-none'>
-                        <Box mx={1} style={{ cursor: "pointer" }}>
+                        <Box mx={1} style={{ cursor: "pointer"}}    marginLeft={60}>
                             <Typography variant="h6" color="inherit">
                                 home
                             </Typography>
