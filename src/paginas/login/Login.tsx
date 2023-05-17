@@ -4,7 +4,7 @@ import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import Carrossel from '../../components/carrossel/Carrossel';
 
-function Home() {
+function Login() {
   return (
     <>
       <h1>Pagina login</h1>
@@ -12,4 +12,4 @@ function Home() {
   )
 }
 
-export default Home;
+export default Login;
