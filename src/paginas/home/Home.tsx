@@ -26,7 +26,7 @@ function Home() {
   </Grid>
             <Grid container style={{ marginTop: "8px" }}>
                     <Grid item xs={12}>
-                        {/* <Carrossel /> */}
+                         <Carrossel />
                     </Grid>
                 </Grid>
     </>
