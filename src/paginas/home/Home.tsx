@@ -3,6 +3,7 @@ import React from 'react';
 import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import Carrossel from '../../components/carrossel/Carrossel';
+import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
 
 function Home() {
   return (
@@ -22,7 +23,9 @@ function Home() {
                 <Grid item xs={6} >
                     <img src="https://i.imgur.com/H88yIo2.png" alt="" width="500px" height="500px" />
                 </Grid>
-               
+                <Grid xs={12} className='postagens'>
+                    <TabPostagem />
+                </Grid>
   </Grid>
             <Grid container style={{ marginTop: "8px" }}>
                     <Grid item xs={12}>

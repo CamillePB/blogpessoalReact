@@ -1,0 +1,9 @@
+.titulo{
+  font-weight: bold;
+  color: black;
+}
+
+.fundoAppbar {
+  color: white;
+  background-color: #992a2a;
+}

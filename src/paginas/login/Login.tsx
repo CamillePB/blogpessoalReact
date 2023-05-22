@@ -8,8 +8,13 @@ import UserLogin from '../../models/UserLogin';
 import './Login.css';
 
 function Login() {
+    // eslint-disable-next-line prefer-const
     let navigate = useNavigate();
+
+    //guardar o token do login validado
     const [token, setToken] = useLocalStorage('token');
+
+    //iniciando um usuario com base em UserLogin
     const [userLogin, setUserLogin] = useState<UserLogin>(
         {
             id: 0,
