@@ -20,8 +20,8 @@ function Home() {
                         <Button variant="outlined" style={{ borderColor: "#1d1616", backgroundColor: "#302525", color: "white" }}>Ver Postagens</Button>
                     </Box>
                 </Grid>
-                <Grid item xs={6} >
-                    <img src="https://i.imgur.com/H88yIo2.png" alt="" width="500px" height="500px" />
+                <Grid item xs={6}>
+                    <img src="https://cdn3.iconfinder.com/data/icons/cat-pattern-colored/94/cat3-1024.png" alt="" width="250px" height="350px" style={{paddingTop:"50px", paddingBottom:"50px"}} />
                 </Grid>
                 <Grid xs={12} className='postagens'>
                     <TabPostagem />
