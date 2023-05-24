@@ -9,15 +9,24 @@ import useLocalStorage from 'react-use-localstorage';
 
 
 function CadastroTema() {
+    //hook para direcornar o usuário no site
   let navigate = useNavigate();
+
+  //hook que manipula parametros
+  //recebendo informação como string e convertido em int no método
   const { id } = useParams<{id: string}>();
+
+  //armazenar parametros dentro do navegador(memoria cache)
   const [token, setToken] = useLocalStorage('token');
+
+  //formato de envio da informaçao
   const [tema, setTema] = useState<Tema>({
-      id: 0,
-      descricao: ''
+      id: 0,//parametro
+      descricao: ''//parametro
   })
 
-  useEffect(() => {
+  //se token for vazio, voltar para a tela login
+  useEffect(() => {//efeito colateral
       if (token == "") {
           alert("Você precisa estar logado")
           navigate("/login")
@@ -25,14 +34,15 @@ function CadastroTema() {
       }
   }, [token])
 
-  //conferir se um id existe
+  //se um id existe, não fazer nada
   useEffect(() =>{
       if(id !== undefined){
           findById(id)
       }
   }, [id])
 
-  async function findById(id: string) {
+  //async: funcionar sem ser chamada
+  async function findById(id: string) {//encontrar tema por id
       buscaId(`/temas/${id}`, setTema, {
           headers: {
             'Authorization': token
@@ -48,21 +58,24 @@ function CadastroTema() {
           })
   
       }
-      
-      async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
-          e.preventDefault()
-          console.log("tema " + JSON.stringify(tema))
+
+      //ao enviar o dado:
+      async function onSubmit(e: ChangeEvent<HTMLFormElement>) { //assistir o que o usário está digitando
+          e.preventDefault()//persistir as informações
+          console.log("tema " + JSON.stringify(tema))//leitura dos dados enviados por json
   
+          //se existir id, fazer a atualizaçao
           if (id !== undefined) {
               console.log(tema)
-              put(`/temas`, tema, setTema, {
+              put(`/temas`, tema, setTema, {//atualiar
                   headers: {
                       'Authorization': token
                   }
               })
               alert('Tema atualizado com sucesso');
           } else {
-              post(`/temas`, tema, setTema, {
+            //se tema ainda não existir, fazer cadastro
+              post(`/temas`, tema, setTema, {//cadastrar
                   headers: {
                       'Authorization': token
                   }
@@ -82,7 +95,8 @@ function CadastroTema() {
       <Container maxWidth="sm" className="topo">
       <form onSubmit={onSubmit}>
           <Typography variant="h4" component="h1" align="center" >Formulário de cadastro tema</Typography>
-          <TextField value={tema.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedTema(e)} id="descricao" label="Descrição" name="descricao" margin="normal" fullWidth  color="white"/>
+          <TextField value={tema.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) =>
+             updatedTema(e)} id="descricao" label="Descrição" name="descricao" margin="normal" fullWidth  color="white"/>
           <Button type="submit" variant="contained" color="primary">
               Finalizar
           </Button>

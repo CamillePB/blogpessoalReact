@@ -36,6 +36,7 @@ function DeletarTema() {
           })
         }
 
+        //confirmar o a exclusão
         function sim() {
           navigate('/temas')
             deleteId(`/tema/${id}`, {
@@ -46,8 +47,9 @@ function DeletarTema() {
             alert('Tema deletado com sucesso');
           }
         
+          //cancelar a exclusão
           function nao() {
-            navigate('/temas')
+            navigate('/temas')//voltar a tela Temas
           }
           
   return (
