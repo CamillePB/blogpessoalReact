@@ -30,12 +30,13 @@ import "./Navbar.css";
                     </Link>
 
                     <Box display="flex" justifyContent="start">
-
+                    <Link to="/formularioPostagem" className="text-decorator-none">
                         <Box mx={1} style={{ cursor: "pointer" }}  marginLeft={75}>
                             <Typography style={{ color: "White" }}>
                                 CRIAR POSTAGEM
                             </Typography>
                         </Box>
+                        </Link>
                         <Link to='/posts' className='text-decorator-none'>
                         <Box mx={1} style={{ cursor: "pointer" }}>
                             <Typography color="inherit">
