@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 //import './Home.css';
 import { Button, Grid, Paper, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
 import Carrossel from '../../components/carrossel/Carrossel';
 import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { UserState } from '../../store/token/Reducer';
 
 function Home() {
+    let navigate = useNavigate();
+    const token = useSelector<UserState, UserState["tokens"]>(
+        (state) => state.tokens
+      );
+    
+    useEffect(() => {
+      if (token == "") {
+          alert("Você precisa estar logado")
+          navigate("/login")
+  
+      }
+  }, [token])
+  
   return (
     <>
     <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#992a2a"}}>

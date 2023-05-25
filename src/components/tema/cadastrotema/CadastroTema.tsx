@@ -6,6 +6,8 @@ import { buscaId, post, put } from '../../../service/Service';
 import {useNavigate, useParams } from 'react-router-dom'
 import './CadastroTema.css';
 import useLocalStorage from 'react-use-localstorage';
+import { useSelector } from 'react-redux';
+import { UserState } from '../../../store/token/Reducer';
 
 
 function CadastroTema() {
@@ -16,8 +18,10 @@ function CadastroTema() {
   //recebendo informação como string e convertido em int no método
   const { id } = useParams<{id: string}>();
 
-  //armazenar parametros dentro do navegador(memoria cache)
-  const [token, setToken] = useLocalStorage('token');
+  //armazenar parametros dentro do reducer
+  const token = useSelector<UserState, UserState["tokens"]>(
+    (state) => state.tokens
+  )
 
   //formato de envio da informaçao
   const [tema, setTema] = useState<Tema>({
@@ -94,7 +98,7 @@ function CadastroTema() {
     return (
       <Container maxWidth="sm" className="topo">
       <form onSubmit={onSubmit}>
-          <Typography variant="h4" component="h1" align="center" >Formulário de cadastro tema</Typography>
+          <Typography variant="h4" component="h1" align="center" >Cadastrar Tema</Typography>
           <TextField value={tema.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) =>
              updatedTema(e)} id="descricao" label="Descrição" name="descricao" margin="normal" fullWidth  color="white"/>
           <Button type="submit" variant="contained" color="primary">

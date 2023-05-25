@@ -11,11 +11,15 @@ import CadastroPostagem from './components/postagens/cadastropostagem/CadastroPo
 import CadastroTema from './components/tema/cadastrotema/CadastroTema'
 import DeletarPostagem from './components/postagens/deletarpostagem/DeletarPostagem'
 import DeletarTema from './components/tema/deletartema/DeletarTema'
-
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
+import { Provider } from 'react-redux'
+import store from './store/Store';
 
 function App() {
+
   return (
-    <>
+  
+    <Provider store={store}>
       <BrowserRouter>
         <Navbar />
         <div style={{ minHeight: '100vh' }}>
@@ -33,12 +37,13 @@ function App() {
             <Route path="/formularioTema/:id" element={<CadastroTema />} />
             <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} />
             <Route path="/deletarTema/:id" element={<DeletarTema />} />
-            {/* </div> */}
+           
           </Routes>
         </div>
         <Footer />
       </BrowserRouter>
-    </>
+      </Provider>
+
   )
 }
 

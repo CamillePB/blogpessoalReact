@@ -5,14 +5,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
 import { login } from '../../service/Service';
 import UserLogin from '../../models/UserLogin';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/token/Actions';
 import './Login.css';
 
 function Login() {
     // eslint-disable-next-line prefer-const
     let navigate = useNavigate();
 
+    const dispatch = useDispatch();
+
     //guardar o token do login validado
-    const [token, setToken] = useLocalStorage('token');
+    const [token, setToken] = useState('');
 
     //iniciando um usuario com base em UserLogin
     const [userLogin, setUserLogin] = useState<UserLogin>(
@@ -33,11 +37,13 @@ function Login() {
         }
 
         //direcionar para pagina home, se usuario for valido
-            useEffect(()=>{
-                if(token != ''){
-                    navigate('/home')
-                }
-            }, [token])
+        useEffect(() =>{
+            if(token !== ''){
+                console.log("Token:", token)
+                dispatch(addToken(token))
+                navigate('/home')
+            }
+        }, [token])
 
         async function onSubmit(e: ChangeEvent<HTMLFormElement>){
             e.preventDefault();
