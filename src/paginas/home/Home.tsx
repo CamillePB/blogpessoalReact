@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 //import './Home.css';
-import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import { Box } from '@mui/material';
 import Carrossel from '../../components/carrossel/Carrossel';
 import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';

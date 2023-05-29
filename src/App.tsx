@@ -14,17 +14,37 @@ import DeletarTema from './components/tema/deletartema/DeletarTema'
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
 import store from './store/Store';
+import { themeOptions } from './themes/ThemeOptions'
+import { ThemeProvider } from '@mui/material'
 
 function App() {
+  const THEME = createTheme({
+    palette: {
+      primary: {
+        light: '#33c9dc',
+        main: '#00bcd4',
+        dark: '#008394',
+        contrastText: '#fff',
+      },
+      secondary: {
+        light: '#637bfe',
+        main: '#6625ff',
+        dark: '#2a3eb1',
+        contrastText: '#fff',
+      },
+    },
+  });
 
   return (
-  
+    <>
+      <MuiThemeProvider theme={THEME}>
     <Provider store={store}>
+      
       <BrowserRouter>
         <Navbar />
         <div style={{ minHeight: '100vh' }}>
           <Routes>
-
+          {/* <ThemeProvider theme={themeOptions}> */}
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -37,13 +57,14 @@ function App() {
             <Route path="/formularioTema/:id" element={<CadastroTema />} />
             <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} />
             <Route path="/deletarTema/:id" element={<DeletarTema />} />
-           
+            {/* </ThemeProvider> */}
           </Routes>
         </div>
         <Footer />
       </BrowserRouter>
       </Provider>
-
+      </MuiThemeProvider>
+</>
   )
 }
 

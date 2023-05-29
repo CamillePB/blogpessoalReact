@@ -1,5 +1,5 @@
 .imagem2{
-  background-image: url(https://i.imgur.com/d5bMdDJ.jpg);
+  background-image: url(https://i.pinimg.com/564x/a3/77/8b/a3778b69702e10edd600eac0ae25a126.jpg);
   background-repeat: no-repeat;
   width: 100vh;
   min-height: 100vh;
@@ -7,9 +7,6 @@
   background-position: center;
 }
 
-.textos2{
-  font-weight: bold !important;
-}
 
 .btnCancelar{
   margin-right: 20px !important;
