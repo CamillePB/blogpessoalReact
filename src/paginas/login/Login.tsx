@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { Grid, Typography, TextField, Button, withStyles } from '@material-ui/core';
+import { Grid, Typography, TextField, Button, withStyles, OutlinedInputProps } from '@material-ui/core';
 import { Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import useLocalStorage from 'react-use-localstorage';
@@ -16,7 +16,7 @@ const StyledButton = withStyles({
         //   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
         borderRadius: 3,
         marginTop: "7px",
-        backgroundColor: '#50A982',
+        backgroundColor: '#489674',
         color: 'white',
         border: '1px',
         height: 36,
@@ -47,6 +47,8 @@ const CssTextField = withStyles({
             borderBottomColor: '#C1ECFF',
         },
         '& .MuiOutlinedInput-root': {
+            backgroundColor: 'rgba(0, 121, 130, 0.2)',
+            color:'white',
             '& fieldset': {
                 borderColor: '#57BBE6',
             },
@@ -57,10 +59,10 @@ const CssTextField = withStyles({
                 borderColor: '#C1ECFF',
             },
             '&:hover': {
-                backgroundColor: 'rgba(0, 121, 130, 0.5)',
+                backgroundColor: 'rgba(0, 121, 130, 0.8)',
             },
             '&$focused': {
-                backgroundColor: 'rgba(0, 121, 130, 0.5)',
+                backgroundColor: 'rgba(0, 121, 130, 1)',
                 boxShadow: '#C1ECFF',
                 borderColor: '#C1ECFF',
                 color: '#57BBE6',
@@ -120,7 +122,7 @@ function Login() {
                 draggable: false,
                 theme: "colored",
                 progress: undefined,
-            });
+                });
         } catch (error) {
             toast.error('Dados do usuário inconsistentes. Erro ao logar!', {
                 position: "top-right",

@@ -9,6 +9,7 @@ import useLocalStorage from 'react-use-localstorage';
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { UserState } from '../../../store/token/Reducer';
+import { toast } from 'react-toastify';
 
 function ListaPostagem() {
   const [posts, setPosts] = useState<Postagem[]>([])
@@ -21,7 +22,16 @@ function ListaPostagem() {
 
   useEffect(() => {
     if (token == "") {
-      alert("Você precisa estar logado")
+      toast.error('Você precisa estar logado', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        theme: "colored",
+        progress: undefined,
+    });
       navigate("/login")
 
     }
@@ -45,24 +55,21 @@ function ListaPostagem() {
     <>
       {//mostra todos os temas presentes no bd
         posts.map(post => (
-          <Box m={2} >
-            <Card variant="outlined">
+          <Box m={2} minWidth={1}>
+            <Card variant="outlined" style={{backgroundColor:'rgba(0, 0, 0, 0.5)', color:'white'}}>
               <CardContent>
-                <Typography color="textSecondary" gutterBottom>
-                  Postagens
-                </Typography>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" component="h2"  align="left">
                   {post.titulo}
                 </Typography>
-                <Typography variant="body2" component="p">
+                <Typography variant="body2" component="p"  align="left">
                   {post.texto}
                 </Typography>
-                <Typography variant="body2" component="p">
+                <Typography variant="body2" component="p"  align="left">
                   {post.tema?.descricao}
                 </Typography>
               </CardContent>
               <CardActions>
-                <Box display="flex" justifyContent="center" mb={1.5}>
+                <Box display="flex" justifyContent="left" mb={1.5}>
 
                   <Link to={`/formularioPostagem/${post.id}`} className="text-decorator-none" >
                     <Box mx={1}>

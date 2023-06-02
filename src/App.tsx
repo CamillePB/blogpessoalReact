@@ -13,7 +13,10 @@ import DeletarPostagem from './components/postagens/deletarpostagem/DeletarPosta
 import DeletarTema from './components/tema/deletartema/DeletarTema'
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
-import store from './store/Store';
+import store from './store/Store'
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { themeOptions } from './themes/ThemeOptions'
 import { ThemeProvider } from '@mui/material'
 
@@ -21,7 +24,7 @@ function App() {
   const THEME = createTheme({
     palette: {
       primary: {
-        light: '#33c9dc',
+        light: '#fff',
         main: '#00bcd4',
         dark: '#008394',
         contrastText: '#fff',
@@ -39,7 +42,7 @@ function App() {
     <>
       <MuiThemeProvider theme={THEME}>
     <Provider store={store}>
-      
+    <ToastContainer />
       <BrowserRouter>
         <Navbar />
         <div style={{ minHeight: '100vh' }}>

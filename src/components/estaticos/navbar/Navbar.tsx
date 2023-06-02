@@ -8,6 +8,7 @@ import "./Navbar.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { UserState } from '../../../store/token/Reducer';
 import { addToken } from '../../../store/token/Actions';
+import { toast } from 'react-toastify';
 
     function Navbar() {
         //função de zerar o token
@@ -22,7 +23,16 @@ import { addToken } from '../../../store/token/Actions';
         //chama a função de token vazio
         function goLogout(){
             dispatch(addToken(''));
-            alert("Usuário deslogado")
+            toast.info('Usuário deslogado', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });
             navigate('/login')
         }
         
@@ -30,46 +40,40 @@ import { addToken } from '../../../store/token/Actions';
 
         //se token não for vazio
         if(token != ""){
-            navbarComponent = <AppBar position="static" style={{ backgroundColor: "#7e1f1f" }}>
+            navbarComponent = <AppBar position="fixed" style={{ background: 'linear-gradient(1deg, #191919 10%, #00121a 100%)'}}>
             <Toolbar variant="dense">
             <Link to='/home' className='text-decorator-none'>
-                <Box style={{ cursor: "pointer" }}>
+                <Box style={{ cursor: "pointer", display:'flex' }} gap={1}>
+                <img className="logo_principal" src="/src/assets/icon.png" alt="" />
                         <Typography variant="h5" color="inherit">
                             BlogPessoal
                         </Typography>
                 </Box>
                 </Link>
 
-                <Box display="flex" justifyContent="start">
-                <Link to="/formularioPostagem" className="text-decorator-none">
-                    <Box mx={1} style={{ cursor: "pointer" }}  marginLeft={75}>
-                        <Typography style={{ color: "White" }}>
-                            CRIAR POSTAGEM
-                        </Typography>
-                    </Box>
-                    </Link>
+                <Box display="flex" marginLeft={90} gap={2.5}>
                     <Link to='/posts' className='text-decorator-none'>
-                    <Box mx={1} style={{ cursor: "pointer" }}>
+                    <Box style={{ cursor: "pointer" }}>
                         <Typography color="inherit">
                             POSTAGENS
                         </Typography>
                     </Box>
                     </Link>
                     <Link to='/temas' className='text-decorator-none'>
-                    <Box mx={1} style={{ cursor: "pointer" }}>
+                    <Box style={{ cursor: "pointer" }}>
                         <Typography color="inherit">
                             TEMAS
                         </Typography>
                     </Box>
                     </Link>
                     <Link to='/formularioTema' className='text-decorator-none'>
-                    <Box mx={1} style={{ cursor: "pointer" }}>
+                    <Box style={{ cursor: "pointer" }}>
                         <Typography color="inherit">
                             CRIAR TEMA
                         </Typography>
                     </Box>
                     </Link>
-                        <Box mx={1} style={{ cursor: "pointer" }} onClick={goLogout}>
+                        <Box style={{ cursor: "pointer" }} onClick={goLogout}>
                             <Typography color="inherit">
                                 SAIR
                             </Typography>

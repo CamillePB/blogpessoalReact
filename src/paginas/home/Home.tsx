@@ -7,49 +7,86 @@ import TabPostagem from '../../components/postagens/tabpostagem/TabPostagem';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { UserState } from '../../store/token/Reducer';
+import { toast } from 'react-toastify';
+import { withStyles } from '@material-ui/core';
+
+const StyledButton = withStyles({
+    root: {
+        //   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        borderRadius: 3,
+        marginTop: "7px",
+        backgroundColor: '#00DA98',
+        color: 'black',
+        height: 36,
+        padding: '0 20px',
+        //   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        '&:hover': {
+            backgroundColor: '#537A56',
+            borderRadius: 3,
+            borderColor: '#C1ECFF',
+            color: 'white',
+        },
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+
+})(Button);
 
 function Home() {
     let navigate = useNavigate();
     const token = useSelector<UserState, UserState["tokens"]>(
         (state) => state.tokens
-      );
-    
+    );
+
     useEffect(() => {
-      if (token == "") {
-          alert("Você precisa estar logado")
-          navigate("/login")
-  
-      }
-  }, [token])
-  
-  return (
-    <>
-    <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#992a2a"}}>
-                <Grid alignItems="center" item xs={6}>
-                    <Box paddingX={20} >
-                        <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "white", fontWeight: "bold" }}>Seja bem vindo(a)!</Typography>
-                        <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "white", fontWeight: "bold" }}>expresse aqui os seus pensamentos e opiniões!</Typography>
+        if (token == "") {
+            toast.error('Você precisa estar logado', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });
+            navigate("/login")
+
+        }
+    }, [token])
+
+    function cadastrar() {
+        navigate('/formularioPostagem')
+    }
+
+
+    return (
+        <>
+            <Grid container direction="row" justifyContent="start" alignItems="center" style={{ background: 'linear-gradient(100deg, #191919 50%, #00DA98 100%)' }}>
+                <Grid alignItems="start" item xs={6}>
+                    <Box paddingX={10} >
+                        <Typography variant="h3" gutterBottom component="h3" align="center" style={{ color: "white" }}>Seja bem vindo(a)!</Typography>
                     </Box>
                     <Box display="flex" justifyContent="center">
-                        <Box marginRight={1}>
-                        </Box>
-                        <Button variant="outlined" style={{ borderColor: "#1d1616", backgroundColor: "#302525", color: "white" }}>Ver Postagens</Button>
+
+                        <StyledButton variant="outlined" onClick={cadastrar}>Criar Postagem</StyledButton>
                     </Box>
                 </Grid>
-                <Grid item xs={6}>
-                    <img src="https://cdn3.iconfinder.com/data/icons/cat-pattern-colored/94/cat3-1024.png" alt="" width="250px" height="350px" style={{paddingTop:"50px", paddingBottom:"50px"}} />
+                <Grid item xs={4} justifyContent="end">
+                    <img src="/src/assets/borboleta.png" alt="" style={{ paddingTop: "100px", paddingBottom: "0px", opacity: '40%', width: "0px", height: "300px" }} />
                 </Grid>
                 <Grid xs={12} className='postagens'>
                     <TabPostagem />
                 </Grid>
-  </Grid>
-            <Grid container style={{ marginTop: "8px" }}>
+            </Grid>
+            {/* <Grid container style={{ marginTop: "8px" }}>
                     <Grid item xs={12}>
                          <Carrossel />
                     </Grid>
-                </Grid>
-    </>
-  )
+                </Grid> */}
+        </>
+    )
 }
 
 export default Home;
