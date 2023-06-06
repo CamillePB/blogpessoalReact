@@ -127,7 +127,16 @@ function CadastroUsuario() {
                 progress: undefined,
             });
         } else {
-           alert('teste');
+            toast.error('Dados do usuário inconsistentes.', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: false,
+                theme: "colored",
+                progress: undefined,
+            });
         }
     }
     return (

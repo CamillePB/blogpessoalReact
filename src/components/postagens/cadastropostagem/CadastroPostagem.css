@@ -1,3 +1,13 @@
 .topo{
   margin-top: 20px;
 }
+
+.txtTema{
+  padding-left: 0px !important;
+padding-top: 13px !important;
+color: #69a4bf !important;
+
+}
+.txtMessage{
+  color: #69a4bf !important;
+}

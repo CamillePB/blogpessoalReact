@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
+import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText, withStyles, createStyles, InputBase, Theme } from "@material-ui/core"
 import './CadastroPostagem.css';
 import {useNavigate, useParams } from 'react-router-dom'
 import Tema from '../../../models/Tema';
@@ -8,6 +8,125 @@ import { busca, buscaId, post, put } from '../../../service/Service';
 import { useSelector } from 'react-redux';
 import { UserState } from '../../../store/token/Reducer';
 import { toast } from 'react-toastify';
+
+const StyledButton = withStyles({
+    root: {
+        //   background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        borderRadius: 3,
+        marginTop: "7px",
+        marginLeft: '10rem',
+        backgroundColor: '#489674',
+        color: 'white',
+        border: '1px',
+        height: 36,
+        padding: '0 20px',
+        width: '7rem',
+        //   boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        '&:hover': {
+            backgroundColor: '#537A56',
+            borderRadius: 3,
+            borderColor: '#C1ECFF',
+            color: 'white',
+        },
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+
+})(Button);
+
+const CssTextField = withStyles({
+    root: {
+        width: '422px',
+        '& label.Mui-focused': {
+            color: '#A6E4FF',
+        },
+        '& label': {
+            color: '#A6E4FF',
+        },
+        '& .MuiInput-underline:after': {
+            borderBottomColor: '#C1ECFF',
+        },
+        '& .MuiOutlinedInput-root': {
+            backgroundColor: 'rgba(0, 121, 130, 0.2)',
+            color:'white',
+            '& fieldset': {
+                borderColor: '#57BBE6',
+            },
+            '&:hover fieldset': {
+                borderColor: '#C1ECFF',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#C1ECFF',
+            },
+            '&:hover': {
+                backgroundColor: 'rgba(0, 121, 130, 0.5)',
+            },
+            '&$focused': {
+                backgroundColor: 'rgba(0, 121, 130, 0.5)',
+                boxShadow: '#C1ECFF',
+                borderColor: '#C1ECFF',
+                color: '#57BBE6',
+            },
+        },
+        focused: {},
+    },
+})(TextField);
+
+const BootstrapInput = withStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            '.MuiSelect-select.MuiSelect-select': {
+                paddingRight: '400px',
+            },
+            'label + &': {
+                marginTop: theme.spacing(2),
+                color: '#A6E4FF',
+            },
+        },
+        input: {
+            borderRadius: 4,
+            position: 'relative',
+            backgroundColor: 'rgba(0, 121, 130, 0.5)',
+            border: '1px solid #C1ECFF',
+            fontSize: 16,
+            padding: '16px 0px 16px 0px',
+            color: '#A6E4FF',
+            transition: theme.transitions.create(['border-color', 'box-shadow']),
+            // Use the system font instead of the default Roboto font.
+            fontFamily: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                '"Segoe UI"',
+                'Roboto',
+                '"Helvetica Neue"',
+                'Arial',
+                'sans-serif',
+                '"Apple Color Emoji"',
+                '"Segoe UI Emoji"',
+                '"Segoe UI Symbol"',
+            ].join(','),
+            '&:focus': {
+                backgroundColor: 'rgba(0, 121, 130, 0.5)',
+                borderRadius: 4,
+                border: '0.8px solid #C1ECFF',
+                boxShadow: '0 0 0 0.08rem #C1ECFF',   
+            },
+            
+        },
+    }),
+)(InputBase);
+
+//text estilizado
+// const StyledTitle = withStyles({
+//     root: {
+//         color: '#155263',
+//         paddingTop: '3rem',
+//         paddingBottom: '1rem',
+//         textAlign: 'center',
+//         fontWeight: 'bold'
+//     },
+// })(Typography);
 
 function CadastroPostagem() {
     let navigate = useNavigate();
@@ -112,7 +231,7 @@ function CadastroPostagem() {
                     'Authorization': token
                 }
             })
-            toast.success('Postagem cadastrada com sucesso', {
+            toast.error('Dados do usuário inconsistentes.', {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -134,30 +253,32 @@ function CadastroPostagem() {
     return (
         <Container maxWidth="sm" className="topo">
             <form onSubmit={onSubmit}>
-                <Typography variant="h4" component="h1" align="center" >Cadastrar postagem</Typography>
-                <TextField value={postagem.titulo} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id="titulo" label="titulo" variant="outlined" name="titulo" margin="normal" fullWidth />
-                <TextField value={postagem.texto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id="texto" label="texto" name="texto" variant="outlined" margin="normal" fullWidth />
+            <Typography variant='h4' gutterBottom component='h3' align='center'>Cadastrar Postagem</Typography>
+                <CssTextField value={postagem.titulo} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id="titulo" label="titulo" variant="outlined" name="titulo" margin="normal" fullWidth />
+                <CssTextField value={postagem.texto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id="texto" label="texto" name="texto" variant="outlined" margin="normal" fullWidth />
 
-                <FormControl >
-                    <InputLabel id="demo-simple-select-helper-label">Tema </InputLabel>
+                <FormControl style={{width:'422px'}} variant="outlined">
+                    <InputLabel id="demo-simple-select-helper-label" className='txtTema'>tema </InputLabel>
                     <Select
+                    variant="outlined"
                         labelId="demo-simple-select-helper-label"
                         id="demo-simple-select-helper"
                         onChange={(e) => buscaId(`/temas/${e.target.value}`, setTema, {
                             headers: {
                                 'Authorization': token
                             }
-                        })}>
+                        })}
+                        input={<BootstrapInput />}>
                         {
                             temas.map(tema => (
                                 <MenuItem value={tema.id}>{tema.descricao}</MenuItem>
                             ))
                         }
                     </Select>
-                    <FormHelperText>Escolha um tema para a postagem</FormHelperText>
-                    <Button type="submit" variant="contained" color="primary">
+                    <FormHelperText className='txtMessage'>Escolha um tema para a postagem</FormHelperText>
+                    <StyledButton type="submit" variant="contained" color="primary">
                         Finalizar
-                    </Button>
+                    </StyledButton>
                 </FormControl>
             </form>
         </Container>
